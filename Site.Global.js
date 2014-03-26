@@ -29,7 +29,19 @@ BBI = {
 				BBI.UWT.bbis.quickSearch();
 				BBI.UWT.bbis.fixFoundation();
 				BBI.UWT.bbis.smartMenus();
+				BBI.UWT.bbis.orbitSlideshow();
 			}, 	
+			
+			// make an orbit slideshow
+			orbitSlideshow: function(){
+				
+				// run obrbit with our jquery no-conflict eg., $$ 
+				if( $$('#slideshow ul li img').length > 0){
+					Foundation.libs.orbit.init();
+				}
+				// trigger resize event forcing orbit to recalculate 
+				 $(window).triggerHandler('resize');
+			},
 			
 			// Remove foundation classes in edit view
 			overrideFoundation: function(){
@@ -79,7 +91,7 @@ BBI = {
 				} 
 			
 			},
-			
+						
 			// Add missing dom elms
 			fixFoundation: function(){
 				
@@ -179,6 +191,15 @@ Sys.WebForms.PageRequestManager.getInstance().add_pageLoaded(function() {
  CLIENT PLUGINS
 
 ---------------------------------------------------
+ Plugin Name: jQuery 1.11.0
+ Description: put jQuery in no-conflict mode immediately 
+ URI: http://jquery.com/
+---------------------------------------------------
+*/
+document.write('<script src="document.doc?id=11"></script>');
+var $$ = jQuery.noConflict();
+
+/*---------------------------------------------------
  Plugin Name: Foundation
  Description: Foundation Responsive Framework
  URI: foundation.zurb.com/
