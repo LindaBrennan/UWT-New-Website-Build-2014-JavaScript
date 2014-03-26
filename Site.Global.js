@@ -63,7 +63,7 @@ BBI = {
 						// iterate over elms and append
 						elms.each( function(){
 							var html = $(this).html();	
-							$('<div class="show-for-small-only small-12 columns cloned">'+html+'</div>').insertAfter();	
+							$('<div class="show-for-small-only small-12 columns cloned">'+html+'</div>').insertAfter(dropSpot);	
 						});
 					
 					}
