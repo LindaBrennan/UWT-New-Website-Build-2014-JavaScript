@@ -42,7 +42,7 @@ BBI = {
 					var dropSpot, elms;
 					// get append location and elms
 					dropSpot = $('#landingcontent');
-					elms = $('.sidebar .hide-for-small-only').children();
+					elms = $('.sidebar .hide-for-small-only').not('#leftnav').children();
 					if (elms.length > 0 && dropSpot.length == 1) {
 						// iterate over elms and append
 						elms.each(function() {
