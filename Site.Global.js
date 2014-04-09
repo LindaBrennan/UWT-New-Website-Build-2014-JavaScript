@@ -103,6 +103,7 @@ BBI = {
 				}
 			},
 			parts: {
+				
 				// Modify the quick search part
 				quickSearch: function() {
 					// Do we have a quick serach part on the page?
@@ -110,6 +111,16 @@ BBI = {
 						// Make the quick search look nice!
 						$('.QuickSearchTextbox').attr('value', 'Search');
 						$('table.QuickSearchFormTable').attr('cellspacing', '0');
+					}
+				},
+
+				//Donation form - for required fields, move the asterisk to before the label on small devices 
+				requiredfield: function() {
+					// Do we have a donation form part on the page?
+					if ($('.DonationFormTable').length >= 1) {
+						// add a class to all mandatory tr
+						  $('td.DonationRequiredFieldMarker, td.DonationCaptureRequiredFieldMarker').closest('tr').addClass('hasRequired');						  
+						  $('span.DonationRequiredFieldMarker').closest('tr').addClass('hasRequired');
 					}
 				}
 			},
