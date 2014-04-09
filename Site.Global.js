@@ -21,6 +21,7 @@ BBI = {
 				BBI.UWT.bbis.foundation.fixFoundation();
 				BBI.UWT.bbis.foundation.orbitSlideshow();
 				BBI.UWT.bbis.parts.quickSearch();
+				BBI.UWT.bbis.parts.donationFormFix();
 				BBI.UWT.bbis.smartMenus();
 				BBI.UWT.bbis.clone.sidebar();
 			},
@@ -122,7 +123,16 @@ BBI = {
 						  $('td.DonationRequiredFieldMarker, td.DonationCaptureRequiredFieldMarker').closest('tr').addClass('hasRequired');						  
 						  $('span.DonationRequiredFieldMarker').closest('tr').addClass('hasRequired');
 					}
-				}
+				},
+				// TODO
+				donationFormFix: function(){
+					// Check for the donation form
+					if( $('.DonationFormTable').length == 1 ){
+						// Move said script from BBIS into this if statment
+						
+						
+					}	
+				},
 			},
 			// Make smart menus
 			smartMenus: function() {
