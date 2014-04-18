@@ -66,6 +66,36 @@ BBI = {
 						// Toggle css class to display the menu
 						$('.off-canvas-wrap').toggleClass('move-right');
 					});
+					// Toggle off canvas for IE
+					if(navigator.userAgent.indexOf('MSIE') != -1 )
+					{
+						// toggle class to hide / show off camvas
+						$('.left-off-canvas-toggle').on('click', function(){
+							// aside
+							$('.left-off-canvas-menu').toggleClass('left-off-canvas-toggle-IE');
+						    // page wrap
+						    $('.left-off-canvas-menu').siblings().toggleClass('left-off-canvas-toggle-inner-IE');
+						
+						});
+						// do we need to add the fix on load?
+						if(viewport <= 1024 && !$('body').hasClass(fix)){
+								// add class to body
+								$('body').addClass(fix);
+						} 
+						
+						window.onresize = function(event) {
+							var viewport = $(window).width();
+							var breakPoint = 1024;
+							var fix = 'ie-foundation-fix';
+							if(viewport <= breakPoint && !$('body').hasClass(fix)){
+								// add class to body
+								$('body').addClass(fix);
+							} else if(viewport > breakPoint && $('body').hasClass(fix)){
+								// add class to body
+								$('body').removeClass(fix);
+							}
+						}	
+					}
 				},
 				// make an orbit slideshow
 				orbitSlideshow: function() {
@@ -105,16 +135,6 @@ BBI = {
 				}
 			},
 			parts: {
-				
-				// modify the quick search part
-				quickSearch: function() {
-					// Do we have a quick serach part on the page?
-					if ($('.QuickSearchFormTable').length >= 1) {
-						// Make the quick search look nice!
-						$('.QuickSearchTextbox').attr('value', 'Search');
-						$('table.QuickSearchFormTable').attr('cellspacing', '0');
-					}
-				},
 				// modify donation form
 				donationForm: {
 					// run donation form methods if form on page
@@ -222,7 +242,15 @@ BBI = {
 						}	
 					}
 				},
-				
+				// modify the quick search part
+				quickSearch: function() {
+					// Do we have a quick serach part on the page?
+					if ($('.QuickSearchFormTable').length >= 1) {
+						// Make the quick search look nice!
+						$('.QuickSearchTextbox').attr('value', 'Search');
+						$('table.QuickSearchFormTable').attr('cellspacing', '0');
+					}
+				},				
 				showPartTitle: function() {
 					// Inform the user that Javascript code is present,
 					// Must include "javascript" in the part title:
@@ -237,7 +265,6 @@ BBI = {
 					}
 				}
 			},
-			// Make smart menus
 			smartMenus: function() {
 				if ($('.main-menu').length >= 1) {
 					$('.main-menu').smartmenus();
