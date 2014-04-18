@@ -21,7 +21,8 @@ BBI = {
 				BBI.UWT.bbis.foundation.fixFoundation();
 				BBI.UWT.bbis.foundation.orbitSlideshow();
 				BBI.UWT.bbis.parts.quickSearch();
-				BBI.UWT.bbis.parts.donationFormFix();
+				BBI.UWT.bbis.parts.donationForm.init();
+				BBI.UWT.bbis.parts.showPartTitle();
 				BBI.UWT.bbis.smartMenus();
 				BBI.UWT.bbis.clone.sidebar();
 			},
@@ -105,7 +106,7 @@ BBI = {
 			},
 			parts: {
 				
-				// Modify the quick search part
+				// modify the quick search part
 				quickSearch: function() {
 					// Do we have a quick serach part on the page?
 					if ($('.QuickSearchFormTable').length >= 1) {
@@ -114,25 +115,127 @@ BBI = {
 						$('table.QuickSearchFormTable').attr('cellspacing', '0');
 					}
 				},
-
-				//Donation form - for required fields, move the asterisk to before the label on small devices 
-				requiredfield: function() {
-					// Do we have a donation form part on the page?
-					if ($('.DonationFormTable').length >= 1) {
-						// add a class to all mandatory tr
-						  $('td.DonationRequiredFieldMarker, td.DonationCaptureRequiredFieldMarker').closest('tr').addClass('hasRequired');						  
-						  $('span.DonationRequiredFieldMarker').closest('tr').addClass('hasRequired');
+				// modify donation form
+				donationForm: {
+					// run donation form methods if form on page
+					init: function(){
+						// Do we have a donation form part on the page?
+						if ($('.DonationFormTable').length >= 1) {
+							// what to run
+							BBI.UWT.bbis.parts.donationForm.requiredFieldMarkers();
+							BBI.UWT.bbis.parts.donationForm.olderCustomizaionScript();
+						}
+					},
+					
+					// add for class for required fields makers, used with small device media query
+					requiredFieldMarkers: function() {
+						// Do we have a donation form part on the page?
+						if ($('.DonationFormTable').length >= 1) {
+							// add a class to all mandatory tr
+							  $('td.DonationRequiredFieldMarker, td.DonationCaptureRequiredFieldMarker').closest('tr').addClass('hasRequired');						  
+							  $('span.DonationRequiredFieldMarker').closest('tr').addClass('hasRequired');
+						}
+					},
+					
+					// add custom text to donation by passing the text, lable and method. The label text must be an exact match
+					olderCustomizaionScript: function(){
+					 	//===Form element re-order
+						var $targetRow = $('label[for$="txtCSC"]').closest('tr');
+						var $privacy = $('label[id$="529"]').closest('tr');
+						var $reminder = $('label[id$="523"]').closest('tr');
+						var $annualReminder = $('label[id$="576"]').closest('tr');
+						var $howRecognized = $('label[id$="558"]').closest('tr');
+						var $company = $('label[id$="577"]').closest('tr');
+						var $recognizedOption = $('label[id$="571"]').closest('tr');
+						
+						$targetRow.after($privacy);
+						$targetRow.after($company);
+						$targetRow.after($annualReminder);
+						$targetRow.after($reminder);
+						$targetRow.after($howRecognized);
+						$targetRow.after($recognizedOption);
+						
+						//Add class to each row
+						($privacy).addClass('attributeBlock');
+						($company).addClass('attributeBlock');
+						($reminder).addClass('attributeBlock');
+						($annualReminder).addClass('attributeBlock');
+						($howRecognized).addClass('attributeBlock Duo2');
+						($recognizedOption).addClass('attributeBlock Duo1');
+						
+						//Break custom attributes out of form for special styling
+						$('.DonationFormTable').after('<table class="formSubmit" />');
+						$('.DonationFormTable tbody:last').appendTo('.formSubmit');
+						$('.formSubmit').before('<table class="attributeBlockTable"><tbody></tbody></table>');
+						$('.attributeBlock').each(function(){
+							$(this).appendTo('.attributeBlockTable');
+						});
+						
+						//Convert new tables to divs
+						$('table.attributeBlockTable').each(function (){
+							$(this).replaceWith( $(this).html()
+							.replace(/<tbody/gi, "<div class='BBFormGroup'")
+							.replace(/<tr/gi, "<div")
+							.replace(/<th/gi, "<div")
+							.replace(/<td/gi, "<div")
+							.replace(/<\/th>/gi, "</div>")
+							.replace(/<\/td>/gi, "</div>")
+							.replace(/<\/tr>/gi, "</div>")
+							.replace(/<\/tbody/gi, "<\/div")
+							);
+						});
+						
+						//Setting select values to YES
+						$('.attributeBlock select.LoginFormSelectList').val('Yes'); 
+						$('select[id$="571"]').val(' ');
+						
+						//Overiding forms that place a 'please select' option as first option
+						$('select[id$="571"] option:first').val(' ');
+						$('select[id$="571"] option:first').text(' ');
+						
+						//Defaulting country selection to Canada
+						//$("select[id$='dd_Country'] option").removeAttr("selected");
+						//$("select[id$='dd_Country'] option[value='Canada']").attr("selected","selected");
+						//$("select[id$='dd_Country']").change();
+							//function blurEffect() {
+								//$('textarea[id$="AddressLine"]').blur();
+							//}
+						//var timeoutID = window.setTimeout(blurEffect, 500);
+						
+						//Input long labels and style inputs
+						$('label[id$="571"]').before( $('.leadershipDonorText').html() );
+						
+						$('input[id$="1563"]').closest('td').css('paddingTop','50px');
+						
+						$('label[id$="577"]').before($('.companyCampaign').html());
+						
+						$('input[id$="577"]').closest('td').css('paddingTop','65px');
+						$('select[id$="576"]').closest('td').css('paddingTop','20px');
+						$('select[id$="529"]').closest('td').css('paddingTop','20px');
+						
+						$('label[id$="523"]').html($('.corpPreferences').html());
+						
+						//Show long label FTI part in edit mode
+						if(window.location.href.match('edit=')) 
+						                {
+						                $('donationFormLongText').css('display','block');
+						}	
 					}
 				},
-				// TODO
-				donationFormFix: function(){
-					// Check for the donation form
-					if( $('.DonationFormTable').length == 1 ){
-						// Move said script from BBIS into this if statment
-						
-						
-					}	
-				},
+				
+				showPartTitle: function() {
+					// Inform the user that Javascript code is present,
+					// Must include "javascript" in the part title:
+					if(window.location.href.match('pagedesign') !== null) {
+						$('td[id$="tdPartName"]:Contains("customization")').each(function() {
+							var uniqueID = $(this).attr("id");
+							uniqueID = uniqueID.slice(0,uniqueID.length-11);
+							var partName = $(this).html();
+							var contentPane = $('div[id*="'+uniqueID+'_pnlPart"]');
+							contentPane.append('<div class="jsPartLabel" style="padding:0 4px 0 24px;background:#000;color:#fff;font-size:11px;">'+partName+'</div>');
+						});					
+					}
+				}
 			},
 			// Make smart menus
 			smartMenus: function() {
