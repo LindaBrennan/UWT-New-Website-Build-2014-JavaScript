@@ -23,6 +23,7 @@ BBI = {
 				BBI.UWT.bbis.parts.quickSearch();
 				BBI.UWT.bbis.parts.donationForm.init();
 				BBI.UWT.bbis.parts.showPartTitle();
+				BBI.UWT.bbis.parts.eventRegistration();
 				BBI.UWT.bbis.smartMenus();
 				BBI.UWT.bbis.clone.sidebar();
 			},
@@ -242,6 +243,14 @@ BBI = {
 						}	
 					}
 				},
+				// modify the event reg 
+				eventRegistration: function(){
+					if($('.EventTable').length >= 1){
+						// add classes to make styling easy, please
+						// table that contains prev and next buttons
+						$('.EventTable .BBFormSubmitButton').parent().closest('table').addClass('buttonsTable');
+					}
+				},
 				// modify the quick search part
 				quickSearch: function() {
 					// Do we have a quick serach part on the page?
@@ -251,6 +260,7 @@ BBI = {
 						$('table.QuickSearchFormTable').attr('cellspacing', '0');
 					}
 				},				
+				// display a part title in admin
 				showPartTitle: function() {
 					// Inform the user that Javascript code is present,
 					// Must include "javascript" in the part title:
