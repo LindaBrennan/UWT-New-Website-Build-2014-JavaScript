@@ -11,12 +11,8 @@ CHANGE LOG
 ***********************************************
 May 14, 2014
 Linda Brennan
-Added Fotorama image slider plugin; 
-used in Annual Report microsite  photo essays
-***********************************************
-May 13, 2014
-Linda Brennan
-Copied to new environment
+Added Fotorama image slider plugin
+Used in Annual Report microsite  photo essays
 **********************************************/
 BBI = {
 UWT: {
@@ -334,7 +330,7 @@ Description: put jQuery in no-conflict mode immediately
 URI: http://jquery.com/
 ---------------------------------------------------
 */
-document.write('<script src="document.doc?id=17"></script>');
+document.write('<script src="document.doc?id=11"></script>');
 var $$ = jQuery.noConflict();
 /*---------------------------------------------------
 Plugin Name: Foundation
@@ -342,15 +338,16 @@ Description: Foundation Responsive Framework
 URI: foundation.zurb.com/
 ---------------------------------------------------
 */
-document.write('<script src="document.doc?id=19"></script>');
+document.write('<script src="document.doc?id=4"></script>');
 /*
+
 ---------------------------------------------------
 Plugin Name: SmartMenus
 Description: jQuery plugin for responsive menu
 URI: http://www.smartmenus.org/
 ---------------------------------------------------
 */
-document.write('<script src="document.doc?id=26"></script>');
+document.write('<script src="document.doc?id=6"></script>');
 /*
 ---------------------------------------------------
 Plugin Name: Respond.js
@@ -358,7 +355,7 @@ Description: JavaScript polyfill for IE8 to use media queries
 URI: https://github.com/scottjehl/Respond
 ---------------------------------------------------
 */
-document.write('<script src="document.doc?id=21"></script>');
+document.write('<script src="document.doc?id=7"></script>');
 /*
 ---------------------------------------------------
 Plugin Name: REM.js
@@ -366,7 +363,7 @@ Description: JavaScript polyfill for IE8 to use REM units
 URI: https://github.com/chuckcarpenter/REM-unit-polyfill
 ---------------------------------------------------
 */
-document.write('<script src="document.doc?id=20"></script>');
+document.write('<script src="document.doc?id=8"></script>');
 /*
 ---------------------------------------------------
 Plugin Name: Fotorama
