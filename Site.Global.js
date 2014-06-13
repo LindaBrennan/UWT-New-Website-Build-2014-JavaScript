@@ -154,6 +154,10 @@ BBI = {
 									}
 								}	
 							});
+							// Check for admin by searching for delete option
+							if($('[id*="rpFileList_btnDelete"]').length >= 1){
+								$('.BBDocumentFormTable').addClass('admin');	
+							}
 						}
 						// Show the documents part
 						$('.BBDocumentFormTable').addClass('complete');							
@@ -357,7 +361,7 @@ Plugin Name: REM.js
 Description: JavaScript polyfill for IE8 to use REM units
 URI: https://github.com/chuckcarpenter/REM-unit-polyfill
 ---------------------------------------------------
-*/
+*/	
 document.write('<script src="document.doc?id=20"></script>');
 /*
 ---------------------------------------------------
